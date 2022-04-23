@@ -9,7 +9,7 @@
   "keywords": [
     "pixiv"
   ],
-  "author": "sakunia",
+  "author": "sakunnia",
   "license": "GNU GPLv3",
   "dependencies": {
     "axios": "^0.26.1",

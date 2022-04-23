@@ -9,8 +9,8 @@
   "keywords": [
     "pixiv"
   ],
-  "author": "sakunia",
-  "license": "GNU GPLv3",
+  "author": "",
+  "license": "GNU GPL
   "dependencies": {
     "axios": "^0.26.1",
     "body-parser": "^1.20.0",
