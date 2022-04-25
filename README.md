@@ -58,7 +58,7 @@ curl http://localhost:3000/get/list?uid=xxx
 ```
 查看图片
 ```shell
-浏览器输入地址: http://localhost:3000/get/show/list?uid=xxx&pid=xxx
+浏览器输入地址: http://localhost:3000/get/show?uid=xxx&pid=xxx
 ```
 
 ## 四、开源协议
