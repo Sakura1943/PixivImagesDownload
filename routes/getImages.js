@@ -14,6 +14,9 @@ const image_path = img.IMAGE_DIR_PATH
 
 /* 列出以下载的画师的作品 */
 router.get('/list', async (req, res, next) => {
+    if (!fs.existsSync(join(__dirname, `../${image_path}`))) {
+        fs.mkdirSync(join(__dirname, `../${image_path}`))
+    }
     /* 从req.query中获取uid(画师id)与type */
     const { uid, type } = req.query
     /* 判断传入值是否为空 */
@@ -51,7 +54,7 @@ router.get('/list', async (req, res, next) => {
                 Str += `------------------------------------------\n${index + 1}: ${element}:\n`
                 image_list.forEach(async (value, i) => {
                     Str += `\(${i + 1}\): ${value}\n`
-                }) 
+                })
             })
             console.log(Str);
             return res.send(`<h1>存在以下画师id以及作品id:</h1><br><p style='width: 100%;white-space: pre-line;'>${Str}<p>`)
@@ -68,6 +71,9 @@ router.get('/list', async (req, res, next) => {
 
 /* 向用户展示图片的接口 */
 router.get('/show', (req, res, next) => {
+    if (!fs.existsSync(join(__dirname, `../${image_path}`))) {
+        fs.mkdirSync(join(__dirname, `../${image_path}`))
+    }
     /* 从req.query中导入用户输入的uid和pid */
     const { uid, pid } = req.query
     /* 判断用户输入pid和uid是否未空 */
