@@ -31,7 +31,7 @@ function GetImageList(uid) {
             } else {
                 resolve(image.data.illusts)
             }
-        } catch (err) {
+        } catch(err) {
             /* 如果网络连接失败, 则返回false */
             console.log(err);
             resolve(false)

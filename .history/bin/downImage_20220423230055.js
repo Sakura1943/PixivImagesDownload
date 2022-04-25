@@ -31,7 +31,7 @@ function GetImageList(uid) {
             } else {
                 resolve(image.data.illusts)
             }
-        } catch (err) {
+        } catch(err) {
             /* 如果网络连接失败, 则返回false */
             console.log(err);
             resolve(false)
@@ -69,7 +69,7 @@ async function SaveImages(uid) {
                 /* 获取作品id */
                 var picID = element.id
                 /* 替换字符串中的 i.pximg.net 使用我的代理 pixiv.sakunia.tk (CloudFlare的Workder) */
-                // imageUrl = await imageUrl.replace(/i.pximg.net/g, 'pixiv.sakunia.tk')
+                imageUrl = await imageUrl.replace(/i.pximg.net/g, 'pixiv.sakunia.tk')
                 /* 如果存储图片的路径不存在， 则创建 */
                 if (!fs.existsSync(join(__dirname, `../${img.IMAGE_DIR_PATH}/uid-${uid}`))) {
                     fs.mkdirSync(join(__dirname, `../${img.IMAGE_DIR_PATH}/uid-${uid}`))
