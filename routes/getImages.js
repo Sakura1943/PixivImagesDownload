@@ -14,31 +14,55 @@ const image_path = img.IMAGE_DIR_PATH
 
 /* 列出以下载的画师的作品 */
 router.get('/list', async (req, res, next) => {
-    /* 从req.query中获取uid(画师id) */
-    const { uid } = req.query
+    /* 从req.query中获取uid(画师id)与type */
+    const { uid, type } = req.query
     /* 判断传入值是否为空 */
-    if (uid !== undefined && uid !== null && uid !== false && uid !== '') {
-        /* 非空则判断文件夹是否存在 */
-        if (!fs.existsSync(join(__dirname, `../${image_path}/uid-${uid}`))) {
-            /* 不存在则提示用户下载 */
-            return res.send('<h1 style=\'color: red;\'>未下载该画师的图片<h1><p>请访问 <strong>down</strong> 接口进行下载</p>')
-        } else {
-            /* 存在则使用fs模块取得该目录下文件以及文件夹的数组 */
-            let image_list = await fs.readdirSync(join(__dirname, `../${image_path}/uid-${uid}`))
-            /* 初始化变量src为string */
-            let src = ''
-            /* 遍历image_list每一项， 并添加到src遍历中 */
-            image_list.forEach((element, index) => {
-                src += `${index + 1}: ${element}\n`
+    if (type !== undefined && type !== null && type !== false && type !== ''
+    ) {
+        if (type === 'once') {
+            if (uid !== undefined && uid !== null && uid !== false && uid !== '') {
+                /* 非空则判断文件夹是否存在 */
+                if (!fs.existsSync(join(__dirname, `../${image_path}/uid-${uid}`))) {
+                    /* 不存在则提示用户下载 */
+                    return res.send('<h1 style=\'color: red;\'>未下载该画师的图片<h1><p>请访问 <strong>down</strong> 接口进行下载</p>')
+                } else {
+                    /* 存在则使用fs模块取得该目录下文件以及文件夹的数组 */
+                    let image_list = fs.readdirSync(join(__dirname, `../${image_path}/uid-${uid}`))
+                    /* 初始化变量src为string */
+                    let src = ''
+                    /* 遍历image_list每一项， 并添加到src遍历中 */
+                    image_list.forEach((element, index) => {
+                        src += `${index + 1}: ${element}\n`
+                    })
+                    /* 向用户返回获得的列表 */
+                    return res.send(`<h1>目录 ${join(__dirname, `../${image_path}/uid-${uid}`)} 存在以下图片:</h1><br><p style='width: 100%;white-space: pre-line;'>${src}<p>`)
+                    /* 执行next函数 */
+                    next()
+                }
+            } else {
+                return res.send(`<h1 style=\'color: red;\'>请输入要查询的画师id<h1>`)
+
+            }
+        } else if (type === 'all') {
+            let user_list = fs.readdirSync(join(__dirname, `../${image_path}`))
+            var Str = ''
+            user_list.forEach(async (element, index) => {
+                let image_list = fs.readdirSync(join(__dirname, `../${image_path}/${element}`))
+                Str += `------------------------------------------\n${index + 1}: ${element}:\n`
+                image_list.forEach(async (value, i) => {
+                    Str += `\(${i + 1}\): ${value}\n`
+                }) 
             })
-            /* 向用户返回获得的列表 */
-            return res.send(`<h1>目录 ${join(__dirname, `../${image_path}/uid-${uid}`)} 存在以下图片:</h1><br><p style='width: 100%;white-space: pre-line;'>${src}<p>`)
-            /* 执行next函数 */
-            next()
+            console.log(Str);
+            return res.send(`<h1>存在以下画师id以及作品id:</h1><br><p style='width: 100%;white-space: pre-line;'>${Str}<p>`)
+        } else {
+            return res.send(`<h1 style=\'color: red;\'>请输入正确的type<h1>
+            <p>type: 检索方式, all 表示检索所有已下载的画师作品, once表示仅检索一个画师的作品</p>`)
         }
     } else {
         /* 若用户未输入值， 则提示用户输入 */
-        return res.send(`<h1 style=\'color: red;\'>请输入要查询的画师id<h1>`)
+        return res.send(`<h1 style=\'color: red;\'>请输入正确的type<h1>
+        <p>type: 检索方式, all 表示检索所有已下载的画师作品, once表示仅检索一个画师的作品</p>`)
     }
 })
 
@@ -63,7 +87,11 @@ router.get('/show', (req, res, next) => {
         }
     } else {
         /* 如果用户输入为空， 则提示用户输入 */
-        return res.send(`<h1 style=\'color: red;\'>请输入要查询的画师id和想要展示的图片id<h1><p>输入的参数如下</p><p>uid: 即画师id, 例如 3036679</p><p>pid: 作品id,  例如 76559075</p><h2>可通过 <strong> /get/list接口获得 </strong></h2>`)
+        return res.send(`<h1 style=\'color: red;\'>请输入要查询的画师id和想要展示的图片id<h1>
+        <p>输入的参数如下</p>
+        <p>uid: 即画师id, 例如 3036679</p>
+        <p>pid: 作品id,  例如 76559075</p>
+        <h2>可通过 <strong> /get/list接口获得 </strong></h2>`)
     }
 })
 

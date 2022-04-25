@@ -4,11 +4,11 @@
 该项目由 [RainChain](https://rainchan.win) 提供的接口进行进一步封装<br>提供了将对应画师`id`的前30张图片下载本地的服务<br>源API接口作者接口文档地址 [https://api.hcyacg.com](https://api.hcyacg.com)
 
 ## 二、接口信息
-| 接口地址                         | 接口参数      | 参数类型 | 参数描述                                                 |
-| -------------------------------- | ------------- | -------- | -------------------------------------------------------- |
-| `http://localhost:3000/down`     | `uid`         | `GET`    | 传入画师`uid`, 在后台下载， 并返回存储地址               |
-| `http://localhost:3000/get/list` | `uid`         | `GET`    | 传入画师`uid`, 并返回存在的图片列表                      |
-| `http://localhost:3000/get/show` | `uid` & `pid` | `GET`    | `uid`即画师id, `pid`即画师作品id(通过`get/list`接口获得) |
+| 接口地址                         | 接口参数                             | 参数类型 | 参数描述                                                                                               |
+| -------------------------------- | ------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------ |
+| `http://localhost:3000/down`     | `uid`                                | `GET`    | 传入画师`uid`, 在后台下载， 并返回存储地址                                                             |
+| `http://localhost:3000/get/list` | `uid`(`type`为`once`下使用) & `type` | `GET`    | 传入`type`=`once`时, 传入画师`uid`, 并返回存在的图片列表; 传入`type`=`all`时, 获得所有已下载的画师作品 |
+| `http://localhost:3000/get/show` | `uid` & `pid`                        | `GET`    | `uid`即画师id, `pid`即画师作品id(通过`get/list`接口获得)                                               |
 
 ## 三、使用
 ### 1、克隆该仓库到本地
@@ -54,7 +54,9 @@ curl http://localhost:3000/down?uid=xxxx
 
 查看列表
 ```shell
-curl http://localhost:3000/get/list?uid=xxx
+curl http://localhost:3000/get/list?type=once&uid=xxx
+或者
+curl http://localhost:3000/get/list?type=all
 ```
 查看图片
 ```shell
