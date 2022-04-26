@@ -53,7 +53,7 @@ router.get('/list', async (req, res, next) => {
                         infoJson.pid.push({
                             filepath: image_path_true,
                             filename: element,
-                            url: `${req.protocol}:${req.headers.host}/imgs/uid-${uid}/pid-${_pid}.jpg`,
+                            url: `${req.protocol}://${req.headers.host}/imgs/uid-${uid}/pid-${_pid}.jpg`,
                             pid: _pid
                         })
                     })
@@ -94,7 +94,7 @@ router.get('/list', async (req, res, next) => {
                     infoJson.painter[index].pid.push({
                         filepath: image_path_true,
                         filename: value,
-                        url: `${req.protocol}:${req.headers.host}/imgs/uid-${_uid}/pid-${_pid}.jpg`,
+                        url: `${req.protocol}://${req.headers.host}/imgs/uid-${_uid}/pid-${_pid}.jpg`,
                         pid: _pid
                     })
                 })
