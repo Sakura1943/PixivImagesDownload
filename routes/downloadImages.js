@@ -21,7 +21,7 @@ router.get('/', async (req, res, next) => {
         /* 如果返回值为 true 则继续执行 */
         if (result === true) {
             /* 下载成功后返回下载成功的提示给用户 */
-            let img_path = join(__dirname, `../${img.IMAGE_DIR_PATH}/${uid}`)
+            let img_path = join(__dirname, `../${img.IMAGE_DIR_PATH}/uid-${uid}`)
             return res.json({
                 success: true,
                 message: `下载完成, 文件保存至 ${img_path}`,
