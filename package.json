@@ -1,6 +1,6 @@
 {
   "name": "pixiv-download-with-painter-id",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "用于通过画师id下载图片",
   "main": "./bin/www",
   "scripts": {

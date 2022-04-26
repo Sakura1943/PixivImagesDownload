@@ -22,21 +22,33 @@ router.get('/', async (req, res, next) => {
         if (result === true) {
             /* 下载成功后返回下载成功的提示给用户 */
             let img_path = join(__dirname, `../${img.IMAGE_DIR_PATH}/${uid}`)
-            return res.send(`<h1>下载完成</h1>\n<p>文件保存至 ${img_path}</p>`)
+            return res.json({
+                success: true,
+                message: `下载完成, 文件保存至 ${img_path}`,
+            })
             next()
         } else {
             /* 返回失败 */
             if (result !== 'connected false.') {
                 /* 不返回 connected false. 则意味着画师未上传图片， 则返回提示给用户 */
-                return res.send(`<h1 style=\'color: red;\'>下载失败</h1><p>画师: ${uid} 未上传图片</p>`)
+                return res.json({
+                    success: false,
+                    message: `下载失败, 画师: ${uid} 未上传图片`
+                })
             } else {
                 /* 返回 connected false. 则返回连接api失败的提示给用户 */
-                return res.send(`<h1 style=\'color: red;\'>下载失败</h1><p>连接API失败</p>`)
+                return res.json({
+                    success: false,
+                    message: '下载失败, 连接API失败'
+                })
             }
         }
     } else {
         /* 若用户为输入uid， 则提示用户输入 */
-        return res.send('<h1 style=\'color: red;\'>请输入画师id</h1>')
+        return res.json({
+            success: false,
+            message: '请输入画师id'
+        })
     }
 })
 
