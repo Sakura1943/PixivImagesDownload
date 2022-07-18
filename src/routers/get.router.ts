@@ -144,7 +144,7 @@ router.get('/list', async (req: Request, res: Response) => {
   })
 })
 /** TODO: Setting router.("/get/show") */
-router.get('show', (req: Request, res: Response) => {
+router.get('/show', (req: Request, res: Response) => {
   if (!existsSync(join(__dirname, `../${configuration.image_folder}`))) {
     mkdirSync(join(__dirname, `../${configuration.image_folder}`))
   }
