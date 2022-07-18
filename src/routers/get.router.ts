@@ -82,7 +82,7 @@ router.get('/list', async (req: Request, res: Response) => {
         })
         /** TODO: Image_list loop. */
         image_list.forEach(async (value: string) => {
-          let _image_path: string = join(__dirname, `../${configuration.image_folder}/uid-${item}/${value}`)
+          let _image_path: string = join(__dirname, `../${configuration.image_folder}/uid-${_uid}/${value}`)
           let _pid: string = value.replace(/(^pid-)|(.jpg)/g, '');
           /** TODO: Insert painter's informations. */    
           (informations.painter as PainterInfo[])[index].pid.push({
@@ -155,7 +155,7 @@ router.get('/show', (req: Request, res: Response) => {
       res.status(403)
       return res.json({
         status: res.statusCode,
-        message: 'Image is not exists.',
+        message: 'Image is not exists.()',
         params: [
           {
             param: 'uid',
@@ -171,7 +171,7 @@ router.get('/show', (req: Request, res: Response) => {
       })
     }
     res.status(200)
-    return res.redirect(`images/uid-${uid}/pid-${pid}.jpg`)
+    return res.redirect(`/images/uid-${uid}/pid-${pid}.jpeg`)
   }
   res.status(403)
   return res.json({

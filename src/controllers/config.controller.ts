@@ -43,7 +43,7 @@ export class ConfigController {
   */
   private ensureConfigFileExists(): void {
     if (!existsSync(this.configFilePath)) {
-      throw new Error(`COnfiguration file ${this.configFilePath} not exists, ensure it has not been created!`)
+      throw new Error(`Configuration file ${this.configFilePath} not exists, ensure it has not been created!`)
     }
   }
   /**

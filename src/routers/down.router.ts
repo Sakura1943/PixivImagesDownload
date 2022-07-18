@@ -10,7 +10,7 @@ export default router.get('/', async (req: Request, res: Response) => {
     let uid: number = Number(req.query.uid)
     /** TODO: DownloadImagesController initialization. */
     const result: DownImageInit = await new DownloadImagesController(uid).init()
-    if ((await result).status == 400) {
+    if (result.status == 400) {
       res.status(400)
       return res.json(result)
     }
