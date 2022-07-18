@@ -19,23 +19,23 @@ router.get("/", (req: Request, res: Response) => {
         type: 'GET',
         list: {
           path: '/get/list',
-          description: '获取已下载的画师图片列表。',
+          description: 'Gets a list of downloaded painter\'s pictures.',
           params: [
             {
               param: 'type',
               options: ['one', 'all'],
               one: {
-                description: '返回某位画师的已下载的图片列表。',
+                description: 'Returns a list of downloaded images from a painter.',
                 params: [
                   {
                     param: 'uid',
-                    description: "画师id"
+                    description: "painter's id"
                   }
                 ],
                 example: '/get/list?type=one&uid=xxxxxx'
               },
               all: {
-                description: '列出所有已下载的画师的图片列表。',
+                description: 'Lists a list of pictures of all downloaded painters.',
                 example: '/get/list?type=all'
               }
             }
@@ -43,15 +43,15 @@ router.get("/", (req: Request, res: Response) => {
         },
         show: {
           path: '/get/show',
-          description: '展示已下载的画师的图片。',
+          description: 'Show a picture of the painter who has been downloaded.',
           params: [
             {
               param: 'uid',
-              description: '图片对应的画师id, 可通过/get/list接口获得。'
+              description: 'The painter id corresponding to the picture can be obtained through the `/get/list` api interface.'
             },
             {
               param: 'pid',
-              description: '图片存在本地的pid, 可通过/get/list接口获得。'
+              description: 'The pid of the image is available via the `/get/list` api interface.'
             }
           ],
           example: '/get/show?uid=xxxxxx&pid=xxxxxx'
@@ -60,11 +60,11 @@ router.get("/", (req: Request, res: Response) => {
       down: {
         path: '/down',
         type: 'GET',
-        description: '画师作品下载(图片)。',
+        description:'Painter\'s work download (picture).',
         params: [
           {
             param: 'uid',
-            description: '要下载的画师的id。'
+            description: 'The id of the painter to download the picture.'
           }
         ],
         example: '/down?uid=xxxxxx'
