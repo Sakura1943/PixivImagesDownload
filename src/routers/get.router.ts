@@ -151,7 +151,7 @@ router.get('/show', (req: Request, res: Response) => {
   const uid: number = Number(req.query.uid)
   const pid: string = String(req.query.pid)
   if (pid && uid) {
-    if (!existsSync(join(__dirname, `../${configuration.image_folder}/uid-${uid}/pid-${pid}.jpg`))) {
+    if (!existsSync(join(__dirname, `../${configuration.image_folder}/uid-${uid}/pid-${pid}.jpeg`))) {
       res.status(403)
       return res.json({
         status: res.statusCode,
